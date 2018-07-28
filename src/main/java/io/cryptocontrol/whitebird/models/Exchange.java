@@ -2,9 +2,15 @@ package io.cryptocontrol.whitebird.models;
 
 import io.cryptocontrol.whitebird.Context;
 import io.cryptocontrol.whitebird.Parameters;
+import io.cryptocontrol.whitebird.exceptions.BalanceFetchException;
+import io.cryptocontrol.whitebird.exceptions.PositionFetchException;
+import io.cryptocontrol.whitebird.exceptions.QuoteFetchException;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author enamakel@cryptocontrol.io
@@ -14,11 +20,10 @@ public abstract class Exchange {
     protected static final Logger logger = LoggerFactory.getLogger(Exchange.class);
 
     protected String name;
-    protected Double tradingFeeds;
-    protected Double withdrawlFees;
-    protected Double depositFees;
+    protected Double tradingFees;
     protected Parameters parameters;
     protected Balances balances = new Balances();
+    protected List<Position> positions = new ArrayList<>();
 
 
     // True iff the current exchange is participating is in an arbitrage already.
@@ -31,59 +36,71 @@ public abstract class Exchange {
 
 
     /**
+     * Gets the price for a given currency pair.
+     *
+     * @param pair The currency pair to get the quote for
+     * @return The quote price for the given currency pair
+     */
+    protected abstract Quote getQuote(CurrencyPair pair) throws QuoteFetchException;
+
+
+    /**
+     * Gets all the positions for a given currency pair.
+     *
+     * @param pair The currency pair to get the quote for
+     * @return A list of positions for the given currency pair
+     */
+    protected abstract List<Position> getPositions(CurrencyPair pair) throws PositionFetchException;
+
+
+    /**
      * Gets the prices for the different currencies
      *
-     * @return A quote of all the different prices, null if the prices fail to be found
+     * @return A quote of all the different prices
      */
-    public abstract Quote getQuote();
+    public abstract List<Quote> updateQuotes() throws QuoteFetchException;
 
 
     /**
      * Updates the user's balances of the different currency pairs he/she holds in this exchange
-     *
-     * @return The balance of the user
      */
-    public abstract Balances updateBalances();
+    public abstract void updateBalances() throws BalanceFetchException;
 
 
     /**
-     * Sends a buy order to buy a particular currency a
-     *
-     * @param currency
-     * @param quantity
-     * @param price
-     * @return
+     * Updates the user's balances of the different currency pairs he/she holds in this exchange
      */
-    public abstract String sendBuyOrder(CurrencyPair pair, Currency currency, Double quantity, Double price);
+    public abstract void updatePositions() throws PositionFetchException;
 
 
     /**
-     * Checks if the order that has been sent has been completed or not
+     * Opens a long position for the given currency pair
      *
-     * @param orderId The id of the order
-     * @return True iff the order has been completed
+     * @param pair     The currency pair to go long on
+     * @param quantity The amount to go long on
+     * @param price    The price at which we should go long on
+     * @return The position that has been opened
      */
-    public abstract Boolean isOrderComplete(String orderId);
+    public abstract Position openLongPosition(CurrencyPair pair, Double quantity, Double price);
 
 
     /**
-     * Gets a deposit address for this not to send the current currency to
+     * Opens a short position for the given currency pair
      *
-     * @param currency The current to be deposited
-     * @return The address to deposit to
+     * @param pair     The currency pair to short
+     * @param quantity The amount to short
+     * @param price    The price at which we should short
+     * @return The position that has been opened
      */
-    public abstract String getDepositAddress(Currency currency);
+    public abstract Position openShortPosition(CurrencyPair pair, Double quantity, Double price);
 
 
     /**
-     * Withdraw the given currency form this exchange to the next one
+     * Close a position.
      *
-     * @param amount   The amount to transfer
-     * @param currency The currency to be sent
-     * @param address  The address to be sent to
-     * @return The transaction id
+     * @param position The position that needs to be closed.
      */
-    public abstract String withdraw(Double amount, Currency currency, String address);
+    public abstract void closePosition(Position position);
 
 
     public String toString() {

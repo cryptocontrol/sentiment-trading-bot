@@ -2,7 +2,6 @@ package io.cryptocontrol.whitebird.trading;
 
 import io.cryptocontrol.whitebird.Context;
 import io.cryptocontrol.whitebird.models.Opportunity;
-import io.cryptocontrol.whitebird.models.Quote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,31 +33,31 @@ public class Trader implements Runnable {
 
         // Loop until we find an exit opportunity
         Boolean hasFoundExitOpportunity = false;
-        while (!hasFoundExitOpportunity) {
-            // Niceness, to avoid DDoSing
-            Thread.sleep(1000);
-
-            // Query both the exchanges
-            Quote longQuote = opportunity.getLongExchange().getQuote();
-            Quote shortQuote = opportunity.getShortExchange().getQuote();
-
-            // We need both quotes from both exchanges. If one of them fails, we bail
-            if (longQuote == null || shortQuote == null) continue;
-
-            // Find an opportunity to exit.
-            logger.debug("Searching for opportunities");
-            hasFoundExitOpportunity = Analyzer.findArbitrageExitOpportunity(opportunity, longQuote,
-                    shortQuote);
-
-            // Once found, we exit from the trade.
-            if (hasFoundExitOpportunity) {
-                logger.debug("Exiting the trade");
-                // TODO: Make the exit trade
-                opportunity.getLongExchange().setIsParticipatingInArbitrage(false);
-                opportunity.getShortExchange().setIsParticipatingInArbitrage(false);
-                break;
-            }
-        }
+//        while (!hasFoundExitOpportunity) {
+//            // Niceness, to avoid DDoSing
+//            Thread.sleep(1000);
+//
+//            // Query both the exchanges
+//            Quote longQuote = opportunity.getLongExchange().getQuote();
+//            Quote shortQuote = opportunity.getShortExchange().getQuote();
+//
+//            // We need both quotes from both exchanges. If one of them fails, we bail
+//            if (longQuote == null || shortQuote == null) continue;
+//
+//            // Find an opportunity to exit.
+//            logger.debug("Searching for opportunities");
+////            hasFoundExitOpportunity = Analyzer.findArbitrageExitOpportunity(opportunity, longQuote,
+////                    shortQuote);
+//
+//            // Once found, we exit from the trade.
+//            if (hasFoundExitOpportunity) {
+//                logger.debug("Exiting the trade");
+//                // TODO: Make the exit trade
+//                opportunity.getLongExchange().setIsParticipatingInArbitrage(false);
+//                opportunity.getShortExchange().setIsParticipatingInArbitrage(false);
+//                break;
+//            }
+//        }
     }
 
 
