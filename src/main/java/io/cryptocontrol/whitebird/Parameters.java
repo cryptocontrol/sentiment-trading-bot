@@ -1,8 +1,12 @@
 package io.cryptocontrol.whitebird;
 
+import com.esotericsoftware.yamlbeans.YamlReader;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.FileReader;
+import java.util.Map;
 
 /**
  * @author enamakel@cryptocontrol.io
@@ -136,6 +140,20 @@ public class Parameters {
 
         logger.info("Spread entry: " + parameters.spreadEntry);
         logger.info("Spread entry target: " + parameters.spreadTarget);
+
+        YamlReader reader = new YamlReader(new FileReader("config.yml"));
+        Object object = reader.read();
+        Map map = (Map) object;
+        Map exchangesMap = (Map) map.get("exchanges");
+
+        if (exchangesMap != null) {
+            Map bitfinexMap = (Map) map.get("bitfinex");
+            if (bitfinexMap != null) {
+                parameters.bitfinexEnable = (Boolean) bitfinexMap.get("enabled");
+                parameters.bitfinexApi = (String) bitfinexMap.get("api");
+                parameters.bitfinexSecret = (String) bitfinexMap.get("secret");
+            }
+        }
 
         // Do some verifications about the parameters
         if (!parameters.demo) {

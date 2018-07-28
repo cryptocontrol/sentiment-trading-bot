@@ -1,12 +1,12 @@
 ![license](https://img.shields.io/hexpm/l/plug.svg)
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/cryptocontrol/sentiment-trading-bot/master/logo.png" width="50%" alt="Whitebird Sentiment-based Trading bot">
+<img src="https://raw.githubusercontent.com/cryptocontrol/sentiment-trading-bot/master/logo.png" width="50%" alt="Whitebird Sentiment-based crypto-trading bot">
 </p>
 
 
 ### Introduction
-Whitebird is a trading bot written in Java (inspired by [Blackbird](https://github.com/butor/blackbird), powered by [CryptoControl.io](https://cryptocontrol.io)) that trades on the basis of the public sentiment of a coin. If the coin sentiment is negative, Whitebird opens a short position on it. If the sentiment for a coin is positive, Whitebird goes long.
+Whitebird is a crypto-trading bot written in Java (inspired by [Blackbird](https://github.com/butor/blackbird), powered by [CryptoControl.io](https://cryptocontrol.io)) that trades on the basis of the public sentiment of a coin. If the coin sentiment is negative, Whitebird opens a short position on it. If the sentiment for a coin is positive, Whitebird goes long.
 
 Whitebird uses exchange APIs to open/close positions and uses the [CryptoControl Sentiment API](https://cryptocontrol.io/apis) to get the sentiment for a particular coin based on crypto news sources.
 

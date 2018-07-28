@@ -32,9 +32,9 @@ public class Main {
 //        if (parameters.okcoinEnable) exchanges.add(new OkCoin());
 //        if (parameters.bitstampEnable) exchanges.add(new Bitstamp());
 
-        // Check if we have a minimum of two exchanges.
-        if (exchanges.size() < 2) {
-            throw new Exception(String.format("Whitebird needs at least two Bitcoin exchanges. Please edit the " +
+        // Check if we have a minimum of one exchange.
+        if (exchanges.size() < 1) {
+            throw new Exception(String.format("Whitebird needs at least one exchange. Please edit the " +
                     "%s file to add new exchanges", DEFAULT_PARAMETER_FILE));
         }
 
@@ -50,6 +50,7 @@ public class Main {
      * A helper function to start the trading loop
      */
     private static void startTrading() {
+        Analyzer.queryExchangesQuotes();
 //        Boolean stillRunning = true;
 //        while (stillRunning) {
 //            List<Quote> quotes = Analyzer.queryExchangesQuotes();
