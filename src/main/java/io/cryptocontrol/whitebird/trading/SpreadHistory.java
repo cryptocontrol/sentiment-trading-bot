@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class SpreadHistory {
     private static Map<String, Spread> map = new HashMap<>();

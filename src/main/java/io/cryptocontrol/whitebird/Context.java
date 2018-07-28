@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * A context object describes the current state (or context) of the application.
  *
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 @Data
 public class Context {

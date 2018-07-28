@@ -18,7 +18,7 @@ import java.util.List;
  * This class is responsible for checking the balance of all the different exchanges and
  * finding any opportunities for arbitrage.
  *
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class Analyzer {
     private static final Logger logger = LoggerFactory.getLogger(Analyzer.class);

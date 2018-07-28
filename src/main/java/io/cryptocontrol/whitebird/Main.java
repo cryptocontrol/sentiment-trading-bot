@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);

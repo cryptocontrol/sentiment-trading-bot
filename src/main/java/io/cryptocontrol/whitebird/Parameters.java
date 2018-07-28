@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 @Data
 public class Parameters {

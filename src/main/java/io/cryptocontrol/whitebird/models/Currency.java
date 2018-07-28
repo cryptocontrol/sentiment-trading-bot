@@ -1,7 +1,7 @@
 package io.cryptocontrol.whitebird.models;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class Currency {
     String name;

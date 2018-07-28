@@ -12,7 +12,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class Request {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");

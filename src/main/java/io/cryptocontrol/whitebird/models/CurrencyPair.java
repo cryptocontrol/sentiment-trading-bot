@@ -3,7 +3,7 @@ package io.cryptocontrol.whitebird.models;
 import lombok.Data;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 @Data
 public class CurrencyPair {

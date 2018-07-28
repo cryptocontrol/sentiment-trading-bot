@@ -5,7 +5,7 @@ import io.cryptocontrol.whitebird.utils.Request;
 import io.cryptocontrol.whitebird.models.*;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class OkCoin extends Exchange {
     private static final String ROOT_URL = "https://www.okcoin.com/api";

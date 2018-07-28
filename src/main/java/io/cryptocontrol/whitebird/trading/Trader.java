@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class Trader implements Runnable {
     private final Logger logger = LoggerFactory.getLogger(Analyzer.class);

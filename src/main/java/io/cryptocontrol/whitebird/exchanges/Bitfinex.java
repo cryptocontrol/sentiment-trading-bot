@@ -5,7 +5,7 @@ import io.cryptocontrol.whitebird.models.*;
 import io.cryptocontrol.whitebird.utils.Request;
 
 /**
- * @author steven.enamakel@gmail.com
+ * @author enamakel@cryptocontrol.io
  */
 public class Bitfinex extends Exchange {
     private static final String ROOT_URL = "https://api.bitfinex.com/v1";
