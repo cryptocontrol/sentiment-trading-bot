@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/com.whitebird.iml" filepath="$PROJECT_DIR$/com.whitebird.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io.cryptocontrol.whitebird.iml" filepath="$PROJECT_DIR$/io.cryptocontrol.whitebird.iml" />
     </modules>
   </component>
 </project>

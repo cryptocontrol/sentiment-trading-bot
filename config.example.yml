@@ -1,0 +1,5 @@
+exchanges:
+  bitfinex:
+    enabled: true
+    key: API_KEY_HERE
+    secret: API_SECRET_HERE

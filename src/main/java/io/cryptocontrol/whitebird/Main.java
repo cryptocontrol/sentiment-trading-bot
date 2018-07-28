@@ -14,15 +14,14 @@ import java.util.List;
  */
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final String DEFAULT_PARAMETER_FILE = "parameters.conf";
+    private static final String DEFAULT_PARAMETER_FILE = "config.yml";
 
 
     /**
      * A helper function to read details from the parameter files and initialize all the
      * exchanges
      */
-    private static void initializeExchanges()
-            throws Exception {
+    private static void initializeExchanges() throws Exception {
         Context context = Context.getInstance();
         Parameters parameters = context.getParameters();
         List<Exchange> exchanges = context.getExchanges();
@@ -33,7 +32,7 @@ public class Main {
 //        if (parameters.bitstampEnable) exchanges.add(new Bitstamp());
 
         // Check if we have a minimum of one exchange.
-        if (exchanges.size() < 1) {
+        if (exchanges.size() == 0) {
             throw new Exception(String.format("Whitebird needs at least one exchange. Please edit the " +
                     "%s file to add new exchanges", DEFAULT_PARAMETER_FILE));
         }

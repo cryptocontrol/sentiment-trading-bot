@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 public class Context {
-    private List<Exchange> exchanges = new ArrayList<Exchange>();
+    private List<Exchange> exchanges = new ArrayList<>();
     private Parameters parameters;
 
 

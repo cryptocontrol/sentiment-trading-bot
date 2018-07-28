@@ -78,12 +78,12 @@ public class Parameters {
     // to use a large value. The default is 180 days with GapSec at 3 seconds
     Integer maxTradeIterations = 5184000;
 
-    String bitfinexApi;
+    String bitfinexKey;
     String bitfinexSecret;
     Double bitfinexTradingFees = 0.0020;
     Double bitfinexWithdrawlFees = 0.0020;
     Double bitfinexDepositFees = 0.0020;
-    Boolean bitfinexEnable = true;
+    Boolean bitfinexEnable = false;
 
     String okcoinApi;
     String okcoinSecret;
@@ -96,7 +96,7 @@ public class Parameters {
     String bitstampApi;
     String bitstampSecret;
     Double bitstampFees;
-    Boolean bitstampEnable = true;
+    Boolean bitstampEnable = false;
 
     String geminiApi;
     String geminiSecret;
@@ -138,19 +138,20 @@ public class Parameters {
     public static Parameters readFromFile(String filename) throws Exception {
         Parameters parameters = new Parameters();
 
-        logger.info("Spread entry: " + parameters.spreadEntry);
-        logger.info("Spread entry target: " + parameters.spreadTarget);
+        logger.info("spread entry: " + parameters.spreadEntry);
+        logger.info("spread entry target: " + parameters.spreadTarget);
 
-        YamlReader reader = new YamlReader(new FileReader("config.yml"));
+        YamlReader reader = new YamlReader(new FileReader(filename));
         Object object = reader.read();
         Map map = (Map) object;
         Map exchangesMap = (Map) map.get("exchanges");
 
         if (exchangesMap != null) {
-            Map bitfinexMap = (Map) map.get("bitfinex");
+            Map bitfinexMap = (Map) exchangesMap.get("bitfinex");
+
             if (bitfinexMap != null) {
-                parameters.bitfinexEnable = (Boolean) bitfinexMap.get("enabled");
-                parameters.bitfinexApi = (String) bitfinexMap.get("api");
+                parameters.bitfinexEnable = bitfinexMap.get("enabled").equals("true");
+                parameters.bitfinexKey = (String) bitfinexMap.get("key");
                 parameters.bitfinexSecret = (String) bitfinexMap.get("secret");
             }
         }
@@ -175,6 +176,6 @@ public class Parameters {
 //            throw new Exception("Valid currency pair is only BTC/USD for now");
 //        }
 
-        return new Parameters();
+        return parameters;
     }
 }
