@@ -8,9 +8,9 @@
 ### Introduction
 Whitebird is a trading bot that trades on the basis of the public sentiment of a coin. If the coin sentiment is negative, Whitebird opens a short position on it. If the sentiment for a coin is positive, Whitebird goes long.
 
-Whitebird uses exchange APIs to open/close positions and uses the CryptoControl Sentiment API to get the sentiment for a particular coin based on crypto news sources.
+Whitebird uses exchange APIs to open/close positions and uses the [CryptoControl Sentiment API](https://cryptocontrol.io/apis) to get the sentiment for a particular coin based on crypto news sources.
 
-For the purposes of this bot, CryptoControl has created a temporary API key that can be used for free until September 31st 2018
+For the purposes of this bot, CryptoControl has created a temporary API key that can be used for free until **September 31st 2018**. To get your own Sentiment API key visit [https://cryptocontrol.io/apis](https://cryptocontrol.io/apis)
 
 ```
 API Key: 129310293j12k3m1238120391asdkj
