@@ -1,4 +1,5 @@
 ![license](https://img.shields.io/hexpm/l/plug.svg)
+![wip](https://img.shields.io/badge/project%20status-work--in--progress-yellow.svg)
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/cryptocontrol/sentiment-trading-bot/master/logo.png" width="50%" alt="Whitebird Sentiment-based crypto-trading bot">
@@ -6,9 +7,13 @@
 
 
 ### Introduction
-Whitebird is a crypto-trading bot written in Java (inspired by [Blackbird](https://github.com/butor/blackbird), powered by [CryptoControl.io](https://cryptocontrol.io)) that trades on the basis of the public sentiment of a coin. If the coin sentiment is negative, Whitebird opens a short position on it. If the sentiment for a coin is positive, Whitebird goes long.
+(WIP) Whitebird is a crypto-trading bot written in Java (inspired by [Blackbird](https://github.com/butor/blackbird), powered by [CryptoControl.io](https://cryptocontrol.io)) that trades on the basis of the public sentiment of a coin. If the coin sentiment is negative, Whitebird opens a short position on it. If the sentiment for a coin is positive, Whitebird goes long.
+
+Sentiment refers to the attitude expressed by an individual regarding a certain topic. This is especially relevant in trading, where so much of the change in price is dictated by emotions.
 
 Whitebird uses exchange APIs to open/close positions and uses the [CryptoControl Sentiment API](https://cryptocontrol.io/apis) to get the sentiment for a particular coin based on crypto news sources.
+
+Whitebird processes information from Twitter, Reddit & News articles and makes trading decisions on the basis of that.
 
 For the purposes of this bot, CryptoControl has created a temporary API key that can be used for free until **September 31st 2018**. To get your own Sentiment API key visit [https://cryptocontrol.io/apis](https://cryptocontrol.io/apis)
 
@@ -53,7 +58,14 @@ mvn clean package
 java -cp target/whitebird.jar io.cryptocontrol.whitebird.Main
 ```
 
+
 ### Exchanges Supported
 - Bitfinex
 - Bitstamp
 - OkCoin
+
+
+### Todo
+Todo list for Whitebird and the CryptoControl team.
+- Process & Monitor sentiment from Telegram groups.
+- Process & Monitor sentiment from pump/dump groups & trading signal groups.
