@@ -1,10 +1,25 @@
 package io.cryptocontrol.whitebird.models.content;
 
 /**
+ * Represents a piece of content which is used to influence a coin.
+ *
  * @author enamakel@cryptocontrol.io
  */
 public interface Content {
+    /**
+     * Get the id from the content.
+     *
+     * @return A unique id
+     */
     String getId();
+
+
+    /**
+     * Get the type of the content. (Article, tweet, reddit post, telegram post)
+     *
+     * @return The type of content.
+     */
+    ContentType getType();
 
 
     /**
@@ -25,4 +40,12 @@ public interface Content {
      * @return The number of people this piece of content could reach out to.
      */
     Long getReachableAudienceCount();
+
+
+    enum ContentType {
+        ARTICLE,
+        REDDIT_POST,
+        TWEET,
+        TELEGRAM_MESSAGE
+    }
 }
