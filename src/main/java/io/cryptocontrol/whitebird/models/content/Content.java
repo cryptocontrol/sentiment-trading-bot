@@ -39,7 +39,7 @@ public interface Content {
      *
      * @return The number of people this piece of content could reach out to.
      */
-    Long getReachableAudienceCount();
+    Double getReachableAudienceCount();
 
 
     enum ContentType {

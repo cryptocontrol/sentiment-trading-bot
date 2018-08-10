@@ -67,7 +67,7 @@ java -cp target/whitebird.jar io.cryptocontrol.whitebird.Main
 
 ### Papers Used
 These are links to some of the papers and material used when building Whitebird.
-- [Trading Strategies to Exploit Blog and News Sentiment](https://www.aaai.org/ocs/index.php/ICWSM/ICWSM10/paper/view/1529) by *Wenbin Zhang and Steven Skiena*
+- [Trading Strategies to Exploit Blog and News Sentiment](https://www.aaai.org/ocs/index.php/ICWSM/ICWSM10/paper/view/1529) 2010 by *Wenbin Zhang and Steven Skiena*
 - [Blackbird](https://github.com/butor/blackbird) - a Bitcoin arbitrage bot with a long/short market-neutral strategy.
 
 ### Todo
