@@ -1,0 +1,7 @@
+version: '3.3'
+
+services:
+  whitebird:
+    image: cryptocontrol-tarantula:latest
+    volumes:
+      - ./config.yml:/usr/src/app/config.yml
