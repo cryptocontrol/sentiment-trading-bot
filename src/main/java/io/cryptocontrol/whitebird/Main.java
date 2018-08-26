@@ -2,9 +2,8 @@ package io.cryptocontrol.whitebird;
 
 import io.cryptocontrol.whitebird.models.Currency;
 import io.cryptocontrol.whitebird.models.Exchange;
-import io.cryptocontrol.whitebird.models.Quote;
 import io.cryptocontrol.whitebird.models.exchanges.Bitfinex;
-import io.cryptocontrol.whitebird.trading.ArticleAnalyzer;
+import io.cryptocontrol.whitebird.trading.ArticleCoinAnalyzer;
 import io.cryptocontrol.whitebird.trading.PriceAnalyzer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,25 +54,14 @@ public class Main {
         PriceAnalyzer.queryExchangesQuotes();
 
         Boolean stillRunning = true;
+
+        ArticleCoinAnalyzer BTCArticleAnalyzer = new ArticleCoinAnalyzer(Currency.BTC);
         while (stillRunning) {
-            ArticleAnalyzer.calculateGeneralSentiment(Currency.BTC);
-
-            List<Quote> quotes = PriceAnalyzer.queryExchangesQuotes();
-
-//            List<Opportunity> opportunities = PriceAnalyzer.findArbitrageEntryOpportunity(quotes);
-//
-//            for (Opportunity opportunity : opportunities) {
-//                Trader trader = new Trader(opportunity);
-//
-//                // If an already existing arbitrage is running amongst any of the two exchanges, then we bail..
-//                if (!trader.isAlreadyArbitrageRunning()) {
-//                    // If not, then we spawn a new thread and perform the arbitrage there.
-//                    trader.runTradeInThread();
-//                }
-//            }
+            BTCArticleAnalyzer.queryGeneralSentiment();
+            PriceAnalyzer.queryExchangesQuotes();
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage());
             }
