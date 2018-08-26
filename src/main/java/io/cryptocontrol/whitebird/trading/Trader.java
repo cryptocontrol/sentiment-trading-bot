@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * @author enamakel@cryptocontrol.io
  */
 public class Trader implements Runnable {
-    private final Logger logger = LoggerFactory.getLogger(Analyzer.class);
+    private final Logger logger = LoggerFactory.getLogger(PriceAnalyzer.class);
     private Context context;
     private Opportunity opportunity;
 
@@ -46,7 +46,7 @@ public class Trader implements Runnable {
 //
 //            // Find an opportunity to exit.
 //            logger.debug("Searching for opportunities");
-////            hasFoundExitOpportunity = Analyzer.findArbitrageExitOpportunity(opportunity, longQuote,
+////            hasFoundExitOpportunity = PriceAnalyzer.findArbitrageExitOpportunity(opportunity, longQuote,
 ////                    shortQuote);
 //
 //            // Once found, we exit from the trade.

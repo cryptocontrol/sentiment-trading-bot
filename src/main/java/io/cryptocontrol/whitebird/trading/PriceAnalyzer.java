@@ -22,8 +22,8 @@ import java.util.List;
  *
  * @author enamakel@cryptocontrol.io
  */
-public class Analyzer {
-    private static final Logger logger = LoggerFactory.getLogger(Analyzer.class);
+public class PriceAnalyzer {
+    private static final Logger logger = LoggerFactory.getLogger(PriceAnalyzer.class);
 
 
     /**

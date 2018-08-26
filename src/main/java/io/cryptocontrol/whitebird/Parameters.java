@@ -78,6 +78,8 @@ public class Parameters {
     // to use a large value. The default is 180 days with GapSec at 3 seconds
     Integer maxTradeIterations = 5184000;
 
+    String cryptocontrolKey;
+
     String bitfinexKey;
     String bitfinexSecret;
     Double bitfinexTradingFees = 0.0020;
@@ -144,8 +146,9 @@ public class Parameters {
         YamlReader reader = new YamlReader(new FileReader(filename));
         Object object = reader.read();
         Map map = (Map) object;
-        Map exchangesMap = (Map) map.get("exchanges");
 
+        // Get the exchanges
+        Map exchangesMap = (Map) map.get("exchanges");
         if (exchangesMap != null) {
             Map bitfinexMap = (Map) exchangesMap.get("bitfinex");
 
@@ -154,7 +157,15 @@ public class Parameters {
                 parameters.bitfinexKey = (String) bitfinexMap.get("key");
                 parameters.bitfinexSecret = (String) bitfinexMap.get("secret");
             }
-        }
+        } else throw new Exception("exchange key is missing in the config.yml");
+
+        // Get the CryptoControl API key
+        Map cryptocontrolMap = (Map) map.get("cryptocontrol");
+        if (cryptocontrolMap != null) {
+            parameters.cryptocontrolKey = (String) cryptocontrolMap.get("key");
+            if (parameters.cryptocontrolKey == null)
+                throw new Exception("cryptocontrol key is missing in the config.yml");
+        } else throw new Exception("cryptocontrol key is missing in the config.yml");
 
         // Do some verifications about the parameters
         if (!parameters.demo) {

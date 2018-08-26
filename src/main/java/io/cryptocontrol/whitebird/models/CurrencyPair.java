@@ -11,6 +11,7 @@ public class CurrencyPair {
     private Currency secondary;
 
     public static final CurrencyPair LTCBTC = new CurrencyPair(Currency.LTC, Currency.BTC);
+    public static final CurrencyPair BTCUSD = new CurrencyPair(Currency.BTC, Currency.USD);
 
 
     private CurrencyPair(Currency p, Currency s) {

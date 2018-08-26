@@ -1,8 +1,11 @@
 package io.cryptocontrol.whitebird;
 
+import io.cryptocontrol.whitebird.models.Currency;
 import io.cryptocontrol.whitebird.models.Exchange;
+import io.cryptocontrol.whitebird.models.Quote;
 import io.cryptocontrol.whitebird.models.exchanges.Bitfinex;
-import io.cryptocontrol.whitebird.trading.Analyzer;
+import io.cryptocontrol.whitebird.trading.ArticleAnalyzer;
+import io.cryptocontrol.whitebird.trading.PriceAnalyzer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,8 +43,8 @@ public class Main {
         logger.info(String.format("Working with %d exchanges", exchanges.size()));
 
         // Now, get the user's balance for each one of the exchanges
-        Analyzer.updateExchangeBalances();
-        Analyzer.updateExchangePositions();
+        PriceAnalyzer.updateExchangeBalances();
+        PriceAnalyzer.updateExchangePositions();
     }
 
 
@@ -49,11 +52,15 @@ public class Main {
      * A helper function to start the trading loop
      */
     private static void startTrading() {
-        Analyzer.queryExchangesQuotes();
-//        Boolean stillRunning = true;
-//        while (stillRunning) {
-//            List<Quote> quotes = Analyzer.queryExchangesQuotes();
-//            List<Opportunity> opportunities = Analyzer.findArbitrageEntryOpportunity(quotes);
+        PriceAnalyzer.queryExchangesQuotes();
+
+        Boolean stillRunning = true;
+        while (stillRunning) {
+            ArticleAnalyzer.calculateGeneralSentiment(Currency.BTC);
+
+            List<Quote> quotes = PriceAnalyzer.queryExchangesQuotes();
+
+//            List<Opportunity> opportunities = PriceAnalyzer.findArbitrageEntryOpportunity(quotes);
 //
 //            for (Opportunity opportunity : opportunities) {
 //                Trader trader = new Trader(opportunity);
@@ -64,13 +71,13 @@ public class Main {
 //                    trader.runTradeInThread();
 //                }
 //            }
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                logger.error(e.getMessage());
-//            }
-//        }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage());
+            }
+        }
     }
 
 

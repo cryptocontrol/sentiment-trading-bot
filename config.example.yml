@@ -1,3 +1,6 @@
+cryptocontrol:
+  key: 129310293j12k3m1238120391asdkj
+
 exchanges:
   bitfinex:
     enabled: true

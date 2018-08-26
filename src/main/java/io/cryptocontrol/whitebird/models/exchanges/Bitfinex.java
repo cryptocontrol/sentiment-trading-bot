@@ -57,7 +57,7 @@ public class Bitfinex extends Exchange {
         logger.debug("fetching pair: " + pair);
 
         try {
-            JsonObject response = Request.makeGetJSONRequest(ROOT_URL + "/v1/ticker/ltcbtc");
+            JsonObject response = Request.makeGetJSONRequest(ROOT_URL + "/v1/ticker/btcusd");
             return new Quote(this, pair,
                     response.get("bid").getAsDouble(),
                     response.get("ask").getAsDouble(),
@@ -80,7 +80,7 @@ public class Bitfinex extends Exchange {
         List<Quote> quotes = new ArrayList<>();
 
         try {
-            quotes.add(this.getQuote(CurrencyPair.LTCBTC));
+            quotes.add(this.getQuote(CurrencyPair.BTCUSD));
         } catch (QuoteFetchException e) {
             e.printStackTrace();
         }
@@ -116,7 +116,7 @@ public class Bitfinex extends Exchange {
 
     @Override public void updatePositions() throws PositionFetchException {
         List<Position> positions = new ArrayList<>();
-        positions.addAll(getPositions(CurrencyPair.LTCBTC));
+        positions.addAll(getPositions(CurrencyPair.BTCUSD));
     }
 
 
