@@ -1,7 +1,6 @@
 package io.cryptocontrol.whitebird.models.exchanges;
 
 import com.google.gson.JsonObject;
-import com.oracle.javafx.jmx.json.JSONException;
 import io.cryptocontrol.whitebird.exceptions.BalanceFetchException;
 import io.cryptocontrol.whitebird.exceptions.PositionFetchException;
 import io.cryptocontrol.whitebird.exceptions.QuoteFetchException;
@@ -214,7 +213,7 @@ public class Bitfinex extends Exchange {
             } else {
                 throw new IOException(e.getClass().getName(), e);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             String msg = "Error on setting up the connection to server";
             throw new IOException(msg, e);
         } finally {

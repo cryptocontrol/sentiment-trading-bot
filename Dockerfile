@@ -12,4 +12,4 @@ COPY src /usr/src/app/src
 RUN mvn clean package
 
 # Set the run command
-CMD java -cp target/tarantula.jar:target/dependency-jars/* io.cryptocontrol.whitebird.Main
+CMD java -cp target/whitebird.jar:target/dependency-jars/* io.cryptocontrol.whitebird.Main
