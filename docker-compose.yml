@@ -2,6 +2,49 @@ version: '3.3'
 
 services:
   whitebird:
-    image: cryptocontrol-tarantula:latest
+    build: .
     volumes:
       - ./config.yml:/usr/src/app/config.yml
+
+
+  influxdb:
+    image: influxdb:latest
+
+    environment:
+      - INFLUX_USERNAME=bot_influxdb
+      - INFLUX_PASSWORD=bot_influxdb
+      - INFLUXDB_DATA_ENGINE=tsm1
+      - INFLUXDB_REPORTING_DISABLED=false
+    volumes:
+      - bot_influxdb:/var/lib/influxdb
+    logging:
+      driver: none
+
+
+  influxdb_telegraf:
+    image: telegraf:latest
+    links:
+      - influxdb
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    logging:
+      driver: none
+
+
+  influxdb_grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 6997:3000
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
+    volumes:
+      - bot_grafana:/var/lib/grafana
+    links:
+      - influxdb
+    logging:
+      driver: none
+
+
+volumes:
+  bot_grafana:
+  bot_influxdb:

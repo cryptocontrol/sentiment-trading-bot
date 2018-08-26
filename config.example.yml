@@ -1,6 +1,12 @@
 cryptocontrol:
   key: 129310293j12k3m1238120391asdkj
 
+influxdb:
+  enabled: true
+  url: http://influxdb.example.com:8086
+  username: INFLUXDB_USERNAME
+  password: INFLUXDB_PASSWORD
+
 exchanges:
   bitfinex:
     enabled: true
