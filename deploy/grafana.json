@@ -1,24 +1,21 @@
 {
     "annotations": {
-        "list": [
-            {
-                "builtIn": 1,
-                "datasource": "-- Grafana --",
-                "enable": true,
-                "hide": true,
-                "iconColor": "rgba(0, 211, 255, 1)",
-                "name": "Annotations & Alerts",
-                "type": "dashboard"
-            }
-        ]
+        "list": [{
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+        }]
     },
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
     "id": 1,
     "links": [],
-    "panels": [
-        {
+    "panels": [{
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -26,21 +23,23 @@
             "datasource": null,
             "fill": 1,
             "gridPos": {
-                "h": 9,
+                "h": 11,
                 "w": 24,
                 "x": 0,
                 "y": 0
             },
             "id": 2,
-            "interval": "10m",
+            "interval": "1m",
             "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "hideEmpty": false,
+                "max": true,
+                "min": true,
                 "show": true,
                 "total": false,
-                "values": false
+                "values": true
             },
             "lines": true,
             "linewidth": 1,
@@ -50,15 +49,21 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "seriesOverrides": [],
+            "seriesOverrides": [{
+                    "alias": "Sentiment",
+                    "yaxis": 2
+                },
+                {
+                    "alias": "Bitfinex",
+                    "yaxis": 1
+                }
+            ],
             "spaceLength": 10,
             "stack": false,
             "steppedLine": false,
-            "targets": [
-                {
+            "targets": [{
                     "alias": "$tag_exchange",
-                    "groupBy": [
-                        {
+                    "groupBy": [{
                             "params": [
                                 "$__interval"
                             ],
@@ -83,8 +88,7 @@
                     "refId": "A",
                     "resultFormat": "time_series",
                     "select": [
-                        [
-                            {
+                        [{
                                 "params": [
                                     "price"
                                 ],
@@ -96,15 +100,194 @@
                             }
                         ]
                     ],
-                    "tags": [
+                    "tags": [{
+                        "key": "pair",
+                        "operator": "=",
+                        "value": "BTC/USD"
+                    }]
+                },
+                {
+                    "alias": "Sentiment",
+                    "groupBy": [{
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
                         {
-                            "key": "pair",
-                            "operator": "=",
-                            "value": "BTC/USD"
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
                         }
-                    ]
+                    ],
+                    "measurement": "coin_sentiment",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "B",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [{
+                                "params": [
+                                    "sentiment"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [{
+                        "key": "coin",
+                        "operator": "=",
+                        "value": "BTC"
+                    }]
                 }
             ],
+            "thresholds": [{
+                    "colorMode": "custom",
+                    "fill": true,
+                    "fillColor": "rgba(255, 0, 0, 0.05)",
+                    "line": false,
+                    "lineColor": "#890f02",
+                    "op": "lt",
+                    "value": 0,
+                    "yaxis": "right"
+                },
+                {
+                    "colorMode": "custom",
+                    "fill": true,
+                    "fillColor": "rgba(0, 255, 0, 0.05)",
+                    "line": false,
+                    "op": "gt",
+                    "value": 0,
+                    "yaxis": "right"
+                }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "BTC/USD Price & Sentiment",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [{
+                    "decimals": null,
+                    "format": "short",
+                    "label": "Price",
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                },
+                {
+                    "decimals": 4,
+                    "format": "percentunit",
+                    "label": "Sentiment",
+                    "logBase": 1,
+                    "max": "1",
+                    "min": "-1",
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": 121
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 0,
+                "y": 11
+            },
+            "id": 8,
+            "interval": "10m",
+            "legend": {
+                "avg": true,
+                "current": true,
+                "hideEmpty": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [{
+                "alias": "$tag_exchange",
+                "groupBy": [{
+                        "params": [
+                            "$__interval"
+                        ],
+                        "type": "time"
+                    },
+                    {
+                        "params": [
+                            "exchange"
+                        ],
+                        "type": "tag"
+                    },
+                    {
+                        "params": [
+                            "linear"
+                        ],
+                        "type": "fill"
+                    }
+                ],
+                "measurement": "currency_price",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                    [{
+                            "params": [
+                                "price"
+                            ],
+                            "type": "field"
+                        },
+                        {
+                            "params": [],
+                            "type": "mean"
+                        }
+                    ]
+                ],
+                "tags": [{
+                    "key": "pair",
+                    "operator": "=",
+                    "value": "BTC/USD"
+                }]
+            }],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
@@ -122,27 +305,28 @@
                 "show": true,
                 "values": []
             },
-            "yaxes": [
-                {
-                    "format": "short",
-                    "label": null,
+            "yaxes": [{
+                    "decimals": null,
+                    "format": "currencyUSD",
+                    "label": "Price",
                     "logBase": 1,
                     "max": null,
                     "min": null,
                     "show": true
                 },
                 {
-                    "format": "short",
-                    "label": null,
+                    "decimals": 4,
+                    "format": "percentunit",
+                    "label": "Sentiment",
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
+                    "max": "1",
+                    "min": "-1",
                     "show": true
                 }
             ],
             "yaxis": {
                 "align": false,
-                "alignLevel": null
+                "alignLevel": 121
             }
         },
         {
@@ -156,8 +340,8 @@
             "gridPos": {
                 "h": 9,
                 "w": 12,
-                "x": 0,
-                "y": 9
+                "x": 12,
+                "y": 11
             },
             "hideTimeOverride": false,
             "id": 3,
@@ -168,7 +352,7 @@
                 "max": true,
                 "min": true,
                 "show": true,
-                "total": true,
+                "total": false,
                 "values": true
             },
             "lines": true,
@@ -182,54 +366,47 @@
             "seriesOverrides": [],
             "spaceLength": 10,
             "stack": false,
-            "steppedLine": true,
-            "targets": [
-                {
-                    "alias": "sentiment",
-                    "groupBy": [
-                        {
+            "steppedLine": false,
+            "targets": [{
+                "alias": "sentiment",
+                "groupBy": [{
+                        "params": [
+                            "$__interval"
+                        ],
+                        "type": "time"
+                    },
+                    {
+                        "params": [
+                            "linear"
+                        ],
+                        "type": "fill"
+                    }
+                ],
+                "measurement": "coin_sentiment",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                    [{
                             "params": [
-                                "$__interval"
+                                "sentiment"
                             ],
-                            "type": "time"
+                            "type": "field"
                         },
                         {
-                            "params": [
-                                "linear"
-                            ],
-                            "type": "fill"
-                        }
-                    ],
-                    "measurement": "coin_sentiment",
-                    "orderByTime": "ASC",
-                    "policy": "default",
-                    "refId": "A",
-                    "resultFormat": "time_series",
-                    "select": [
-                        [
-                            {
-                                "params": [
-                                    "sentiment"
-                                ],
-                                "type": "field"
-                            },
-                            {
-                                "params": [],
-                                "type": "mean"
-                            }
-                        ]
-                    ],
-                    "tags": [
-                        {
-                            "key": "coin",
-                            "operator": "=",
-                            "value": "BTC"
+                            "params": [],
+                            "type": "mean"
                         }
                     ]
-                }
-            ],
-            "thresholds": [
-                {
+                ],
+                "tags": [{
+                    "key": "coin",
+                    "operator": "=",
+                    "value": "BTC"
+                }]
+            }],
+            "thresholds": [{
                     "colorMode": "custom",
                     "fill": true,
                     "fillColor": "rgba(0, 255, 0, 0.05)",
@@ -265,136 +442,13 @@
                 "show": true,
                 "values": []
             },
-            "yaxes": [
-                {
+            "yaxes": [{
                     "decimals": null,
-                    "format": "short",
+                    "format": "percentunit",
                     "label": null,
                     "logBase": 1,
                     "max": "1",
                     "min": "-1",
-                    "show": true
-                },
-                {
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
-        },
-        {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": null,
-            "decimals": null,
-            "fill": 1,
-            "gridPos": {
-                "h": 9,
-                "w": 12,
-                "x": 12,
-                "y": 9
-            },
-            "hideTimeOverride": false,
-            "id": 4,
-            "interval": "30m",
-            "legend": {
-                "alignAsTable": false,
-                "avg": true,
-                "current": true,
-                "hideEmpty": false,
-                "hideZero": false,
-                "max": true,
-                "min": true,
-                "rightSide": false,
-                "show": true,
-                "total": true,
-                "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-                {
-                    "alias": "articles added",
-                    "groupBy": [
-                        {
-                            "params": [
-                                "$__interval"
-                            ],
-                            "type": "time"
-                        },
-                        {
-                            "params": [
-                                "0"
-                            ],
-                            "type": "fill"
-                        }
-                    ],
-                    "measurement": "articles_history",
-                    "orderByTime": "ASC",
-                    "policy": "default",
-                    "refId": "A",
-                    "resultFormat": "time_series",
-                    "select": [
-                        [
-                            {
-                                "params": [
-                                    "count"
-                                ],
-                                "type": "field"
-                            },
-                            {
-                                "params": [],
-                                "type": "sum"
-                            }
-                        ]
-                    ],
-                    "tags": []
-                }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "New Articles Added",
-            "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "decimals": null,
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": "0",
                     "show": true
                 },
                 {
@@ -419,7 +473,7 @@
                 "h": 10,
                 "w": 24,
                 "x": 0,
-                "y": 18
+                "y": 20
             },
             "id": 6,
             "links": [],
@@ -430,8 +484,7 @@
                 "col": 0,
                 "desc": true
             },
-            "styles": [
-                {
+            "styles": [{
                     "alias": "Time",
                     "dateFormat": "MM/DD/YY h:mm:ss a",
                     "pattern": "Time",
@@ -489,51 +542,41 @@
                     "unit": "short"
                 }
             ],
-            "targets": [
-                {
-                    "groupBy": [
-                        {
-                            "params": [
-                                "article"
-                            ],
-                            "type": "tag"
-                        }
+            "targets": [{
+                "groupBy": [{
+                    "params": [
+                        "article"
                     ],
-                    "measurement": "articles_history",
-                    "orderByTime": "DESC",
-                    "policy": "default",
-                    "refId": "A",
-                    "resultFormat": "table",
-                    "select": [
-                        [
-                            {
-                                "params": [
-                                    "title"
-                                ],
-                                "type": "field"
-                            }
+                    "type": "tag"
+                }],
+                "measurement": "articles_history",
+                "orderByTime": "DESC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "table",
+                "select": [
+                    [{
+                        "params": [
+                            "title"
                         ],
-                        [
-                            {
-                                "params": [
-                                    "source"
-                                ],
-                                "type": "field"
-                            }
+                        "type": "field"
+                    }],
+                    [{
+                        "params": [
+                            "source"
                         ],
-                        [
-                            {
-                                "params": [
-                                    "sentiment"
-                                ],
-                                "type": "field"
-                            }
-                        ]
-                    ],
-                    "slimit": "50",
-                    "tags": []
-                }
-            ],
+                        "type": "field"
+                    }],
+                    [{
+                        "params": [
+                            "sentiment"
+                        ],
+                        "type": "field"
+                    }]
+                ],
+                "slimit": "50",
+                "tags": []
+            }],
             "title": "Latest 50 Articles",
             "transform": "table",
             "transparent": false,
@@ -547,7 +590,7 @@
                 "h": 10,
                 "w": 12,
                 "x": 0,
-                "y": 28
+                "y": 30
             },
             "id": 7,
             "interval": "1hr",
@@ -559,8 +602,7 @@
                 "col": 0,
                 "desc": true
             },
-            "styles": [
-                {
+            "styles": [{
                     "alias": "Time",
                     "dateFormat": "MM/DD/YY h:mm:ss a",
                     "pattern": "Time",
@@ -619,43 +661,155 @@
                     "unit": "short"
                 }
             ],
-            "targets": [
-                {
-                    "groupBy": [
-                        {
+            "targets": [{
+                "groupBy": [{
+                    "params": [
+                        "source"
+                    ],
+                    "type": "tag"
+                }],
+                "measurement": "articles_history",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "table",
+                "select": [
+                    [{
                             "params": [
-                                "source"
+                                "count"
                             ],
-                            "type": "tag"
+                            "type": "field"
+                        },
+                        {
+                            "params": [],
+                            "type": "sum"
                         }
-                    ],
-                    "measurement": "articles_history",
-                    "orderByTime": "ASC",
-                    "policy": "default",
-                    "refId": "A",
-                    "resultFormat": "table",
-                    "select": [
-                        [
-                            {
-                                "params": [
-                                    "count"
-                                ],
-                                "type": "field"
-                            },
-                            {
-                                "params": [],
-                                "type": "sum"
-                            }
-                        ]
-                    ],
-                    "slimit": "50",
-                    "tags": []
-                }
-            ],
+                    ]
+                ],
+                "slimit": "50",
+                "tags": []
+            }],
             "title": "Top Sources",
             "transform": "table",
             "transparent": false,
             "type": "table"
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "decimals": null,
+            "fill": 1,
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 12,
+                "y": 30
+            },
+            "hideTimeOverride": false,
+            "id": 4,
+            "interval": "30m",
+            "legend": {
+                "alignAsTable": false,
+                "avg": true,
+                "current": true,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": true,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [{
+                "alias": "articles added",
+                "groupBy": [{
+                        "params": [
+                            "$__interval"
+                        ],
+                        "type": "time"
+                    },
+                    {
+                        "params": [
+                            "0"
+                        ],
+                        "type": "fill"
+                    }
+                ],
+                "measurement": "articles_history",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                    [{
+                            "params": [
+                                "count"
+                            ],
+                            "type": "field"
+                        },
+                        {
+                            "params": [],
+                            "type": "sum"
+                        }
+                    ]
+                ],
+                "tags": []
+            }],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "New Articles Added",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+            },
+            "yaxes": [{
+                    "decimals": null,
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": null,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false,
+                "alignLevel": null
+            }
         }
     ],
     "refresh": false,
@@ -700,5 +854,5 @@
     "timezone": "",
     "title": "BTC/USD Sentiment Analysis",
     "uid": "Jz0QkZ2ik",
-    "version": 16
+    "version": 24
 }
