@@ -11,9 +11,9 @@
 
 Sentiment refers to the attitude expressed by an individual regarding a certain topic. This is especially relevant in trading, where so much of the change in price is dictated by emotions.
 
-Whitebird uses exchange APIs to open/close positions and uses the [CryptoControl Sentiment API](https://cryptocontrol.io/apis) to get the sentiment for a particular coin based on crypto news sources.
+Whitebird uses exchange APIs to open/close margin positions and uses the [CryptoControl Sentiment API](https://cryptocontrol.io/en/developers/sentiment-api) to get the sentiment for a particular coin based on crypto news sources.
 
-Whitebird processes information from Twitter, Reddit & News articles and makes trading decisions on the basis of the activity from each of them.
+Whitebird processes information from Twitter, Reddit & News articles and makes trading decisions on the basis of the activity from each of them. Whitebird can also connect to an InfuxDB server to track various analytics.
 
 For the purposes of this bot, CryptoControl has created a temporary API key that can be used for free until **September 31st 2018**. To get your own Sentiment API key visit [https://cryptocontrol.io/apis](https://cryptocontrol.io/apis)
 
@@ -23,9 +23,7 @@ API Key: 129310293j12k3m1238120391asdkj
 
 
 ### Disclaimer
-USE THE SOFTWARE AT YOUR OWN RISK. YOU ARE RESPONSIBLE FOR YOUR OWN MONEY. PAST PERFORMANCE IS NOT NECESSARILY INDICATIVE OF FUTURE RESULTS.
-
-THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
+USE THE SOFTWARE AT YOUR OWN RISK. YOU ARE RESPONSIBLE FOR YOUR OWN MONEY. PAST PERFORMANCE IS NOT NECESSARILY INDICATIVE OF FUTURE RESULTS. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
 
 
 ### How it works
@@ -57,6 +55,9 @@ mvn clean package
 # run the java file
 java -cp target/whitebird.jar io.cryptocontrol.whitebird.Main
 ```
+
+### Usage with InfluxDB and Grafana
+While the bot makes trades and prints out log messages, it can also connect to an InfluxDB server (which can be used with Grafana) to see activity visually.
 
 
 ### Exchanges Supported
