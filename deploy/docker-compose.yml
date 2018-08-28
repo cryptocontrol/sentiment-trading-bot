@@ -1,15 +1,16 @@
 version: '3.3'
 
 services:
-  whitebird:
-    build: .
-    volumes:
-      - ./config.yml:/usr/src/app/config.yml
+#  whitebird:
+#    build: ../
+#    volumes:
+#      - ../config.yml:/usr/src/app/config.yml
 
 
   influxdb:
     image: influxdb:latest
-
+    ports:
+      - 8086:8086
     environment:
       - INFLUX_USERNAME=bot_influxdb
       - INFLUX_PASSWORD=bot_influxdb
@@ -17,8 +18,6 @@ services:
       - INFLUXDB_REPORTING_DISABLED=false
     volumes:
       - bot_influxdb:/var/lib/influxdb
-    logging:
-      driver: none
 
 
   influxdb_telegraf:
@@ -27,22 +26,18 @@ services:
       - influxdb
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
-    logging:
-      driver: none
 
 
   influxdb_grafana:
     image: grafana/grafana:latest
     ports:
-      - 6997:3000
+      - 3000:3000
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource
     volumes:
       - bot_grafana:/var/lib/grafana
     links:
       - influxdb
-    logging:
-      driver: none
 
 
 volumes:
