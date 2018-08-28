@@ -78,7 +78,16 @@ public class Parameters {
     // to use a large value. The default is 180 days with GapSec at 3 seconds
     Integer maxTradeIterations = 5184000;
 
+    // CryptoControl API key
     String cryptocontrolKey;
+
+    // InfluxDB details
+    Boolean influxdbEnabled = false;
+    String influxDBUrl;
+    String influxDBUsername;
+    String influxDBPassword;
+    String influxDBDatabase;
+
 
     String bitfinexKey;
     String bitfinexSecret;
@@ -166,6 +175,17 @@ public class Parameters {
             if (parameters.cryptocontrolKey == null)
                 throw new Exception("cryptocontrol key is missing in the config.yml");
         } else throw new Exception("cryptocontrol key is missing in the config.yml");
+
+        // Get the InfluxDB details
+        Map influxdbMap = (Map) map.get("influxdb");
+        if (influxdbMap != null) {
+            parameters.influxdbEnabled = influxdbMap.get("enabled").equals("true");
+            parameters.influxDBPassword = (String) influxdbMap.get("password");
+            parameters.influxDBUsername = (String) influxdbMap.get("username");
+            parameters.influxDBUrl = (String) influxdbMap.get("url");
+            parameters.influxDBDatabase = (String) influxdbMap.get("database");
+        }
+
 
         // Do some verifications about the parameters
         if (!parameters.demo) {

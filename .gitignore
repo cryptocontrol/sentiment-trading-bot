@@ -16,3 +16,4 @@ workspace.xml
 config.yml
 *.iml
 .idea
+deploy/production

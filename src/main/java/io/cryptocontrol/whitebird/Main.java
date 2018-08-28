@@ -5,6 +5,7 @@ import io.cryptocontrol.whitebird.models.Exchange;
 import io.cryptocontrol.whitebird.models.exchanges.Bitfinex;
 import io.cryptocontrol.whitebird.trading.ArticleCoinAnalyzer;
 import io.cryptocontrol.whitebird.trading.PriceAnalyzer;
+import io.cryptocontrol.whitebird.utils.Analytics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,6 +90,9 @@ public class Main {
             if (args.length >= 1) parameters = Parameters.readFromFile(args[0]);
             else parameters = Parameters.readFromFile(DEFAULT_PARAMETER_FILE);
             context.setParameters(parameters);
+
+            // Enable Analytics with influxdb
+            Analytics.initialize();
 
             // Initialize all the exchanges
             logger.debug("initializing exchanges");

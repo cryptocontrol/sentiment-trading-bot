@@ -8,6 +8,7 @@ import io.cryptocontrol.whitebird.models.Balances;
 import io.cryptocontrol.whitebird.models.Exchange;
 import io.cryptocontrol.whitebird.models.Position;
 import io.cryptocontrol.whitebird.models.Quote;
+import io.cryptocontrol.whitebird.utils.Analytics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +47,10 @@ public class PriceAnalyzer {
             // Get a quote from the exchange.
             try {
                 List<Quote> exchangeQuotes = exchange.updateQuotes();
+
+                for (Quote quote : exchangeQuotes) {
+                    Analytics.trackCurrencyPriceChange(exchange, quote.getCurrencyPair(), quote.getLastPrice(), 0d);
+                }
 
                 // If we got the quote succesfully, we add it into our list
                 quotes.addAll(exchangeQuotes);

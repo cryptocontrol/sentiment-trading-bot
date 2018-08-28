@@ -6,6 +6,7 @@ influxdb:
   url: http://influxdb.example.com:8086
   username: INFLUXDB_USERNAME
   password: INFLUXDB_PASSWORD
+  database: INFLUXDB_DATABASE
 
 exchanges:
   bitfinex:
