@@ -42,6 +42,7 @@ Have a look at the [`config.example.yml`](./config.example.yml) file for configu
 The easiest way to get Whitebird up and running is to use Docker and Docker Compose. Simply run:
 ```shell
 # Using docker build and run whitebird
+cd deploy
 docker-compose up
 ```
 
